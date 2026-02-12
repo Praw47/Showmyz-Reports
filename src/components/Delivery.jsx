@@ -108,7 +108,7 @@ const handleDownload = async () => {
              }} 
              value={amount}
              onChange={(e)=>setAmount(e.target.value)}
-             type="text"
+             type="number"
             placeholder='Amount' />
             <span>Shipping:</span>
             <input
@@ -118,7 +118,7 @@ const handleDownload = async () => {
              }}
              value={ship}
              onChange={(e)=>setShip(e.target.value)}  
-             type="text" placeholder='Shippping:' />
+             type="number" placeholder='Shippping:' />
             <span>Delivery:</span>
             <input type='date'
             style={{
@@ -139,7 +139,7 @@ const handleDownload = async () => {
              onChange={(e)=>setGetName(e.target.value)}
              placeholder='Name' />
             <span >Total:</span>
-            <input type="text"
+            <input type="number"
               value={total}
               onChange={(e)=>setTotal(e.target.value)}
               style={{marginRight:"100px",
