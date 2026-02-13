@@ -190,8 +190,8 @@ const handleDownload = async () => {
               <div className="colCen">
                 <span>Name :</span>
                 <input type="text"
-                  value={total}
-                  onChange={(e)=>setTotal(e.target.value)}
+                  value={getName}
+                  onChange={(e)=>setGetName(e.target.value)}
                   placeholder='Customer Name' />
               </div>
               <div className="colCen">
