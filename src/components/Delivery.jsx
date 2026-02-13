@@ -21,9 +21,9 @@ export const Delivery = () => {
   const [getName, setGetName] = useState("");
   const [total, setTotal] = useState("");
   const [amountGet, setAmountGet] = useState("");
-  const [sumTot, setSumTot] = useState(0);
+//   const [sumTot, setSumTot] = useState(0);
 
-  const sumTot = Number(amount) + Number(ship);
+//   const sumTot = Number(amount) + Number(ship);
 
   const handleImageChange = (index, event) => {
     const file = event.target.files[0];
@@ -143,7 +143,6 @@ const handleDownload = async () => {
              placeholder='Name' />
             <span >Total:</span>
             <input type="number"
-              value={sumTot}
               onChange={(e)=>setTotal(e.target.value)}
               style={{marginRight:"100px",
               border: isEmpty(total) ? "1px solid red" : "transparent"
@@ -241,7 +240,7 @@ const handleDownload = async () => {
             <h5>DELIVERED TO:</h5>
           </div>
           <div className="addThree">
-            <input
+            {/* <input
              value={toAddress}
              onChange={(e)=>setToAdress(e.target.value)}
              placeholder='Enter to address'
@@ -259,7 +258,13 @@ const handleDownload = async () => {
                 .map((line) => line.trim()) // remove extra spaces
                 .join("\n")           // join with newline character
               }
-            </p>
+            </p> */}
+              <textarea
+                value={toAddress}
+                onChange={(e) => setToAdress(e.target.value)}
+                rows={8}
+              />
+
             <p className='botSideP' style={{ whiteSpace: "pre-line" }}>
               <h4
                style={{
