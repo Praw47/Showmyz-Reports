@@ -252,15 +252,22 @@ const handleDownload = async () => {
               textWrap:"wrap",
               visibility: hideAddress ? "visible" : "hidden"
              }} 
-            type="text" />
-            <p className='topSideP' style={{ whiteSpace: "pre-line" }}>
+            type="text" /> */}
+            <p className='topSideP' 
+              style={{ 
+              whiteSpace: "pre-line"
+             }}>
               {toAddress.split(",")           // split by comma
                 .map((line) => line.trim()) // remove extra spaces
                 .join("\n")           // join with newline character
               }
-            </p> */}
+            </p>
               <textarea
                 value={toAddress}
+                style={{
+                  textWrap:"wrap",
+                  visibility: hideAddress ? "visible" : "hidden"
+                }}  
                 onChange={(e) => setToAdress(e.target.value)}
                 rows={8}
               />
