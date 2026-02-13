@@ -6,13 +6,13 @@ import { useRef } from "react";
 
 
 export const Delivery = () => {
-  const [topDate, setTopDate] = useState("")
+  const [topDate, setTopDate] = useState("");
   const [order, setOrder] = useState(880);
   const [images, setImages] = useState([null, null, null]);
   const [hideInp, setHideInp] = useState(true);
   const [toAddress, setToAdress] = useState("");
-  const [accGetOne, setAccGetOne] = useState("")
-  const [accGetTwo, setAccGetTwo] = useState("")
+  const [accGetOne, setAccGetOne] = useState("");
+  const [accGetTwo, setAccGetTwo] = useState("");
   const [hideAddress, setHideAddress] = useState(true);
   const [firPageHide, setFirPageHide] = useState(true)
   const [secPageHide, setSecPageHide] = useState(true);
