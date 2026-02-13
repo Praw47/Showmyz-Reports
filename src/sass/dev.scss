@@ -24,6 +24,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-x:scroll;
   .border{
     width: 90%;
     height: 92.5%;
@@ -393,6 +394,7 @@ span{
     width: 210mm;
     display: flex;
     flex-direction: column;
+    overflow-x:scroll;
 }
 .container,
 .secondContainer {
