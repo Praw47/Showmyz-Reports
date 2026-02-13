@@ -20,7 +20,10 @@ export const Delivery = () => {
   const [ship, setShip] = useState("");
   const [getName, setGetName] = useState("");
   const [total, setTotal] = useState("");
-  const [amountGet, setAmountGet] = useState("")
+  const [amountGet, setAmountGet] = useState("");
+  const [sumTot, setSumTot] = useState(0);
+
+  const sumTot = Number(amount) + Number(ship);
 
   const handleImageChange = (index, event) => {
     const file = event.target.files[0];
@@ -140,7 +143,7 @@ const handleDownload = async () => {
              placeholder='Name' />
             <span >Total:</span>
             <input type="number"
-              value={total}
+              value={sumTot}
               onChange={(e)=>setTotal(e.target.value)}
               style={{marginRight:"100px",
               border: isEmpty(total) ? "1px solid red" : "transparent"
