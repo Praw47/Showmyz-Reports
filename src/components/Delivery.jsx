@@ -122,8 +122,7 @@ const handleDownload = async () => {
             <span>Delivery:</span>
             <input type='date'
             style={{
-              width:"100px",
-              border: isEmpty(total) ? "1px solid red" : "transparent"
+              width:"100px"
             }}
              value={topDate}
              onChange={(e)=>setTopDate(e.target.value)}
@@ -169,9 +168,6 @@ const handleDownload = async () => {
             <input type="date" 
              value={amountGet}
              onChange={(e)=>setAmountGet(e.target.value)}
-             style={{
-              border: isEmpty(total) ? "1px solid red" : "transparent"
-             }}
             />
           </div>
         </div>
