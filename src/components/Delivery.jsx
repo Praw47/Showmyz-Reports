@@ -38,7 +38,7 @@ export const Delivery = () => {
 const printRef = useRef();
 
 const validateAndDownload = () => {
-  if (!amount || !ship || !topDate || !getName || !total) {
+  if (!amount || !ship || !topDate || !getName) {
     alert("⚠️ Please fill all required fields before downloading!");
     return;
   }
