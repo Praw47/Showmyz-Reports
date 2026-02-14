@@ -19,7 +19,6 @@ export const Delivery = () => {
   const [amount, setAmount] = useState("");
   const [ship, setShip] = useState("");
   const [getName, setGetName] = useState("");
-  const [total, setTotal] = useState("");
   const [amountGet, setAmountGet] = useState("");
 
   const getAmountShip = (Number(amount) || 0) + (Number(ship) || 0);
@@ -142,9 +141,7 @@ const handleDownload = async () => {
             <span >Total:</span>
             <input type="number"
               value={getAmountShip}
-              onChange={(e)=>setTotal(e.target.value)}
-              style={{marginRight:"100px",
-              border: isEmpty(total) ? "1px solid red" : "transparent"
+              style={{marginRight:"100px"
               }}  placeholder='Total' />
             <input type="text" className='empty' disabled />
           </div>
