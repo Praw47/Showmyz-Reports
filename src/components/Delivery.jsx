@@ -7,7 +7,7 @@ import { useRef } from "react";
 
 export const Delivery = () => {
   const [topDate, setTopDate] = useState("");
-  const [order, setOrder] = useState(880);
+  const [order, setOrder] = useState("");
   const [images, setImages] = useState([null, null, null]);
   const [hideInp, setHideInp] = useState(true);
   const [toAddress, setToAdress] = useState("");
@@ -99,11 +99,21 @@ const handleDownload = async () => {
             <h2>SOWMYZ COUTURE</h2>
           </div>
           <div className="getFirstRow inp">
-            <span style={{color:"orange"}} >Order {order} </span>
+            <span style={{color:"orange"}} >Order
+               <input type="number"
+                placeholder='Order'
+                value={order}
+                onChange={(e)=>setOrder(e.target.value)}
+                style={{
+                  width:"70px",
+                  border: isEmpty(amount) ? "1px solid red" : "transparent"
+                }} 
+               /> 
+              </span>
             <input
              className='amountInp'
              style={{
-              width:"120px",
+              width:"90px",
               border: isEmpty(amount) ? "1px solid red" : "transparent"
              }} 
              value={amount}
