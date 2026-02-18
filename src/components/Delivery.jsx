@@ -69,7 +69,8 @@ const handleDownload = async () => {
   const img2 = canvas2.toDataURL("image/png");
   pdf.addImage(img2, "PNG", 0, 0, 210, 297);
 
-  pdf.save("SOWMYZCOUTURE.pdf");
+  const saveContent = "SowmyzCouture-"+order+".pdf"
+  pdf.save(saveContent);
 
   // restore UI after download
   setHideInp(true);
