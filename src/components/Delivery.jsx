@@ -14,8 +14,6 @@ export const Delivery = () => {
   const [accGetOne, setAccGetOne] = useState("");
   const [accGetTwo, setAccGetTwo] = useState("");
   const [hideAddress, setHideAddress] = useState(true);
-  const [firPageHide, setFirPageHide] = useState(true)
-  const [secPageHide, setSecPageHide] = useState(true);
   const [amount, setAmount] = useState("");
   const [ship, setShip] = useState("");
   const [getName, setGetName] = useState("");
@@ -93,7 +91,7 @@ const handleDownload = async () => {
   return (
     <div className="wholeContainer">
     <div className="printWrapper" ref={printRef}>
-    <div className="container" style={{ display: firPageHide ? "flex" : "none" }}>
+    <div className="container">
       <div className="border">
         <div className="header">
           <div className="titleName">
@@ -352,10 +350,7 @@ const handleDownload = async () => {
         </div>
       </div>
     </div>
-    <div className="secondContainer"
-     style={{
-      display: secPageHide ? "flex" : "none"
-     }}>
+    <div className="secondContainer">
       <div className="borders">
         <div className="topViewSec">
             <h4>DELIVERED TO : </h4>
@@ -439,32 +434,10 @@ const handleDownload = async () => {
     </div>  
     <div className="finishUp"
     >
-      <button
-        onClick={() => {
-          setSecPageHide(false);
-          setFirPageHide(true);
-        }}
-      >
-        {"<"}
-      </button>
       <button className='clBTN' onClick={validateAndDownload}>
         Download
       </button>
       <button className='reBTN' onClick={handleReset}>Reset</button>
-      <button
-        onClick={() => {
-          setFirPageHide(false);
-          setSecPageHide(true);
-        }}
-      >
-        {">"}
-      </button>
-      <button onClick={() => setOrder(prev => prev + 1)}>
-        +
-      </button>
-      <button onClick={() => setOrder(prev => prev - 1)}>
-        -
-      </button>
     </div>
     </div>
   )
