@@ -148,7 +148,6 @@ const handleDownload = async () => {
              placeholder='Name' />
             <span >Total:</span>
             <input type="number"
-              {/* value={getAmountShip} */}
               style={{marginRight:"100px"
               }}  placeholder='Total' />
             <input type="text" className='empty' disabled />
