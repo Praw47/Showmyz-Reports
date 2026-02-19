@@ -156,15 +156,13 @@ const handleDownload = async () => {
             <span>ACCESSORIES-I :</span>
             <input type="text"
              value={accGetOne}
-             onChange={(e)=>setAccGetOne(e.target.value)}
-             placeholder='ACCESSORIES-I' />
+             onChange={(e)=>setAccGetOne(e.target.value)} />
           </div>
           <div className="getFourthRow inp">
             <span>ACCESSORIES-II : </span>
             <input type="text"
              value={accGetTwo}
-             onChange={(e)=>setAccGetTwo(e.target.value)}
-            placeholder='ACCESSORIES-II' />
+             onChange={(e)=>setAccGetTwo(e.target.value)} />
           </div>
           <div className="getFifthRow inp">
             <h5>DATE AND ACCOUNT</h5>
@@ -185,7 +183,10 @@ const handleDownload = async () => {
           </div>
           <div className="cenSec cen">
             <p>MATERIALS AVAILABILITY</p>
-            <h6>Delivery Date: <span>{topDate}</span> </h6>
+            <h6>
+              Delivery Date:
+              <input type="date" value={topDate} /> 
+            </h6>
           </div>
           <div className="cenTwoLefAndRigh">
             <div className="leftCen">
@@ -206,13 +207,11 @@ const handleDownload = async () => {
               </div>
               <div className="colCen">
                 <span>Accessory-I :</span>
-                <input onChange={setAccGetOne.value} type="text" value={accGetOne} 
-                placeholder='Accessories - I' />
+                <input onChange={setAccGetOne.value} type="text" value={accGetOne} />
               </div>
               <div className="colCen">
                 <span>Accessory-II :</span>
-                <input onChange={setAccGetTwo.value} type="text" value={accGetTwo} 
-                placeholder='Accessories - II' />
+                <input onChange={setAccGetTwo.value} type="text" value={accGetTwo} />
               </div>
             </div>
             <div className="righCen">
