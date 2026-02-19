@@ -148,6 +148,7 @@ const handleDownload = async () => {
              placeholder='Name' />
             <span >Total:</span>
             <input type="number"
+              value={getAmountShip}
               style={{marginRight:"100px"
               }}  placeholder='Total' />
             <input type="text" className='empty' disabled />
@@ -156,13 +157,15 @@ const handleDownload = async () => {
             <span>ACCESSORIES-I :</span>
             <input type="text"
              value={accGetOne}
-             onChange={(e)=>setAccGetOne(e.target.value)} />
+             onChange={(e)=>setAccGetOne(e.target.value)}
+             placeholder='ACCESSORIES-I' />
           </div>
           <div className="getFourthRow inp">
             <span>ACCESSORIES-II : </span>
             <input type="text"
              value={accGetTwo}
-             onChange={(e)=>setAccGetTwo(e.target.value)} />
+             onChange={(e)=>setAccGetTwo(e.target.value)}
+            placeholder='ACCESSORIES-II' />
           </div>
           <div className="getFifthRow inp">
             <h5>DATE AND ACCOUNT</h5>
@@ -183,10 +186,7 @@ const handleDownload = async () => {
           </div>
           <div className="cenSec cen">
             <p>MATERIALS AVAILABILITY</p>
-            <h6>
-              Delivery Date:
-              <input type="date" value={topDate} /> 
-            </h6>
+            <h6>Delivery Date: <span>{topDate}</span> </h6>
           </div>
           <div className="cenTwoLefAndRigh">
             <div className="leftCen">
@@ -207,11 +207,13 @@ const handleDownload = async () => {
               </div>
               <div className="colCen">
                 <span>Accessory-I :</span>
-                <input onChange={setAccGetOne.value} type="text" value={accGetOne} />
+                <input onChange={setAccGetOne.value} type="text" value={accGetOne} 
+                placeholder='Accessories - I' />
               </div>
               <div className="colCen">
                 <span>Accessory-II :</span>
-                <input onChange={setAccGetTwo.value} type="text" value={accGetTwo} />
+                <input onChange={setAccGetTwo.value} type="text" value={accGetTwo} 
+                placeholder='Accessories - II' />
               </div>
             </div>
             <div className="righCen">
@@ -352,7 +354,7 @@ const handleDownload = async () => {
       <div className="borders">
         <div className="topViewSec">
             <h4>DELIVERED TO : </h4>
-            <p className='topSideP' style={{ whiteSpace: "pre-line" }}>
+            <p style={{ whiteSpace: "pre-line" }}>
                 {toAddress.split(",")           // split by comma
                   .map((line) => line.trim()) // remove extra spaces
                   .join("\n")           // join with newline character
