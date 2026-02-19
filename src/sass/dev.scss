@@ -340,8 +340,12 @@ span{
         height: 250px;
         display: flex;
         align-items: start;
-        padding-top: 20px;
+        padding-top: 5px;
+        justify-content: start;
         flex-direction: column;
+        p{
+            margin-top: -20px;
+        }
     }
     .nextViewSecTwo{
         width: 70%;
