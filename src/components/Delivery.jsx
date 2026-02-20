@@ -131,7 +131,8 @@ const handleDownload = async () => {
             <span>Delivery:</span>
             <input type='text'
             style={{
-              width:"100px"
+              width:"100px",
+              border: isEmpty(ship) ? "1px solid red" : "transparent"
             }}
              value={topDate}
              onChange={(e)=>setTopDate(e.target.value)}
