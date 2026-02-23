@@ -16,6 +16,10 @@ body {
     justify-content: start;
     flex-direction: column;
 }
+.topdateConfirm{
+    position: absolute;
+    top: -25px;
+}
 .container {
   width: 210mm;
   min-height: 297mm;
@@ -393,13 +397,77 @@ span{
     .bottomSecPage{
         width: 100%;
         height: 40%;
-        form{
-            width: 70%;
-            table tr{
-                width: 200px;
-                td{
-                    width: 500px;
-                }   
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;   
+        .botPageFir{
+            width: 25%;
+            height: 100%;
+            display: flex;
+            align-items: start;
+            flex-direction: column;
+            .cutClass{
+                font-weight: 700;
+                margin-bottom: 50px;
+                text-decoration: underline;
+            }
+            p{
+                margin-left: 5px;
+                height: 5px;
+                text-align: left;
+            }
+        }
+        .botPageSec{
+            width: 25%;
+            height: 100%;
+            display: flex;
+            align-items: start;
+            justify-content: center;
+            flex-direction: column;
+            .btoRuffle{
+                margin-bottom: 100px;
+            }
+        }
+        .botPageThr{
+            width: 25%;
+            height: 100%;
+            display: flex;
+            align-items: start;
+            justify-content: center;
+            flex-direction: column;
+            align-content: center;
+            p{
+                position: relative;
+                top: 0;
+                left: 0;
+                margin-right: 100px; 
+                margin-bottom: 210px;
+                word-wrap: normal;
+                text-decoration: underline;
+                font-weight: 700;
+            }
+            form{
+                position: absolute;
+                margin-bottom: 80px;
+                margin-right: 80px;
+            }
+        }
+        .botPageFour{
+            width: 25%;
+            height: 100%;
+            display: flex;
+            align-items: start;
+            flex-direction: column;
+            .cutClass{
+                font-weight: 700;
+                margin-bottom: 50px;
+                text-decoration: underline;
+            }
+            p{
+                margin-left: 5px;
+                height: 5px;
+                text-align: left;
             }
         }
     }
