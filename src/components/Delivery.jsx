@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../sass/dev.scss'
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -18,7 +18,17 @@ export const Delivery = () => {
   const [ship, setShip] = useState("");
   const [getName, setGetName] = useState("");
   const [amountGet, setAmountGet] = useState("");
+  const [today, setToday] = useState("");
 
+
+  const updateToday = () => {
+    const date = new Date();
+    const formattedDate = date.toDateString(); // Example: "Mon Feb 23 2026"
+    setToday(formattedDate); // update the state
+  };
+   useEffect(() => {
+    updateToday();
+  }, []);
   const getAmountShip = (Number(amount) || 0) + (Number(ship) || 0);
   const handleImageChange = (index, event) => {
     const file = event.target.files[0];
@@ -93,6 +103,9 @@ const handleDownload = async () => {
     <div className="printWrapper" ref={printRef}>
     <div className="container">
       <div className="border">
+        <div className="topdateConfirm">
+          <h5> Today: {today} </h5>
+        </div>
         <div className="header">
           <div className="titleName">
             <h2>SOWMYZ COUTURE</h2>
@@ -387,45 +400,44 @@ const handleDownload = async () => {
         <hr />
         <div className="empty"></div>
         <div className="bottomSecPage">
-          <form>
-            <table>
-              <tr>
-                <td style={{textDecoration:"underline"}} >CUTTING MEASUREMENT</td>
-                <td>
-
-                </td>
-                <td style={{textDecoration:"underline"}} >
-                  TOP
-                </td>
-              </tr>
-              <tr>
-                <td>W</td>
-                <td></td>
-                <td>LINING</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>SATIN</td>
-              </tr>
-              <tr>
-                <td>B</td>
-                <td>CIRCLE</td>
-                <td>MAIN FABRIC</td>
-              </tr>
-              <tr>
-                <td>L</td>
-                <td>RUFFLE</td>
-                <td>NET</td>
-              </tr>
-              <tr>
-                <td>S</td>
-              </tr>
-              <tr>
-                <td>N</td>
-              </tr>
-            </table>
-          </form>
+          <div className="botPageFir">
+            <p className='cutClass' >CUTTING MEASUREMENT</p>
+            <p>W</p>
+            <p>B</p>
+            <p>L</p>
+            <p>S</p>
+            <p>N</p>
+          </div>
+          <div className="botPageSec">
+            <p>CIRCLE</p>
+            <p className='btoRuffle' >RUFFLE</p>
+          </div>
+          <div className="botPageThr">
+            <p>Tailor</p>
+            <form>
+              <table border={1} >
+                <tr>
+                  <td>Cancan</td>
+                  <td><input type="text" style={{ width:"70px" }} /></td>
+                </tr>
+                <tr>
+                  <td>Meter</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>H.H</td>
+                  <td></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+          <div className="botPageFour">
+            <p className='cutClass' >TOP</p>
+            <p>LINING</p>
+            <p>SATIN</p>
+            <p>MAIN FABRIC</p>
+            <p>NET</p>
+          </div>
         </div>
       </div>
     </div>
