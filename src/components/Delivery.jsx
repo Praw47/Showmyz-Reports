@@ -77,7 +77,7 @@ const handleDownload = async () => {
   const img2 = canvas2.toDataURL("image/png");
   pdf.addImage(img2, "PNG", 0, 0, 210, 297);
 
-  const saveContent = "SowmyzCouture-"+order+".pdf"
+  const saveContent = order+".pdf"
   pdf.save(saveContent);
 
   // restore UI after download
