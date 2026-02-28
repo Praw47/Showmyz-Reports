@@ -304,33 +304,16 @@ const handleDownload = async () => {
         </div>
         <div className="bottomPage">
           <div className="leftBotPage">
-            <form>
-              <tr>
-                <td>HAIRBAND/CLIP</td>
-              </tr>
-              <tr>
-                <td>BOW</td>
-              </tr>
-              <tr>
-                <td>BOW BELT</td>
-              </tr>
-              <tr>
-                <td>WINGS</td>
-              </tr>
-              <tr>
-                <td>TRAIL</td>
-                <td>RUFFEL SIZE</td>
-              </tr>
-              <tr>
-                <td>EARING</td>
-              </tr>
-              <tr>
-                <td>STRAP</td>
-              </tr>
-              <tr>
-                <td>SHOES</td>
-              </tr>
-            </form>
+            <li>HAIRBAND</li>
+            <li>BOW</li>
+            <li>BOW BELT</li>
+            <li>WINGS</li>
+            <li>TRAIL</li>
+            <li>RUFFEL SIZE</li>
+            <li>EARING</li>
+            <li>STRAP</li>
+            <li>SHOES</li>
+            <li>TIARA</li>
             <div className="inpGetImages">
               {[0, 1, 2].map((index) => (
               <input
@@ -409,16 +392,16 @@ const handleDownload = async () => {
             <p>N</p>
           </div>
           <div className="botPageSec">
-            <p>CIRCLE</p>
-            <p className='btoRuffle' >RUFFLE</p>
+            <p className='botP' >CIRCLE</p>
+            <p className='btoRuffle botP ' >RUFFLE</p>
           </div>
           <div className="botPageThr">
-            <p>Tailor</p>
+            <p className='tailorHead' >Tailor</p>
             <form>
               <table border={1} >
                 <tr>
                   <td>Cancan</td>
-                  <td><input type="text" style={{ width:"70px" }} /></td>
+                  <td><input type="text" style={{ width:"100px" }} /></td>
                 </tr>
                 <tr>
                   <td>Meter</td>
@@ -433,10 +416,10 @@ const handleDownload = async () => {
           </div>
           <div className="botPageFour">
             <p className='cutClass' >TOP</p>
-            <p>LINING</p>
-            <p>SATIN</p>
-            <p>MAIN FABRIC</p>
-            <p>NET</p>
+            <li>LINING</li>
+            <li>SATIN</li>
+            <li>MAIN FABRIC</li>
+            <li>NET</li>
           </div>
         </div>
       </div>
