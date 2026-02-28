@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../sass/dev.scss'
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -6,21 +6,30 @@ import { useRef } from "react";
 
 
 export const Delivery = () => {
-  const [topDate, setTopDate] = useState("")
-  const [order, setOrder] = useState(880);
+  const [topDate, setTopDate] = useState("");
+  const [order, setOrder] = useState("");
   const [images, setImages] = useState([null, null, null]);
   const [hideInp, setHideInp] = useState(true);
   const [toAddress, setToAdress] = useState("");
-  const [accGetOne, setAccGetOne] = useState("")
-  const [accGetTwo, setAccGetTwo] = useState("")
+  const [accGetOne, setAccGetOne] = useState("");
+  const [accGetTwo, setAccGetTwo] = useState("");
   const [hideAddress, setHideAddress] = useState(true);
-  const [firPageHide, setFirPageHide] = useState(true)
-  const [secPageHide, setSecPageHide] = useState(true);
   const [amount, setAmount] = useState("");
   const [ship, setShip] = useState("");
   const [getName, setGetName] = useState("");
-  const [total, setTotal] = useState("");
+  const [amountGet, setAmountGet] = useState("");
+  const [today, setToday] = useState("");
 
+
+  const updateToday = () => {
+    const date = new Date();
+    const formattedDate = date.toDateString(); // Example: "Mon Feb 23 2026"
+    setToday(formattedDate); // update the state
+  };
+   useEffect(() => {
+    updateToday();
+  }, []);
+  const getAmountShip = (Number(amount) || 0) + (Number(ship) || 0);
   const handleImageChange = (index, event) => {
     const file = event.target.files[0];
     if (file) {
@@ -35,87 +44,109 @@ export const Delivery = () => {
    ]
 const printRef = useRef();
 
-function trueEvents(){
-  if(amount === ""){
-    console.error("Enter all the details")
+const validateAndDownload = () => {
+  if (!amount || !ship || !topDate || !getName) {
+    alert("⚠️ Please fill all required fields before downloading!");
+    return;
   }
-  else if(ship === ""){
-    console.error("Enter all the details")
-  }
-  else if(topDate === ""){
-    console.error("Enter all the details")
-  }
-  else if(getName === ""){
-    console.error("Enter all the details")
-  }
-  else if(total === ""){
-    console.error("Enter all the details")
-  }
-  else{
-    handleImageChange();
-  }
-}  
+
+  // If all fields are filled → allow download
+  handleDownload();
+};
+
+const isEmpty = (val) => !val || val.trim() === "";
 
 const handleDownload = async () => {
+  setHideInp(false);
+  setHideAddress(false);
+
+  // wait for DOM to update
+  await new Promise(resolve => setTimeout(resolve, 500));
+
   const pdf = new jsPDF("p", "mm", "a4");
 
-  setHideInp(false)
-  setHideAddress(false)
-  setOrder(prev => prev + 1);
   const firstPage = document.querySelector(".container");
   const secondPage = document.querySelector(".secondContainer");
 
-  // Page 1
   const canvas1 = await html2canvas(firstPage, { scale: 2 });
   const img1 = canvas1.toDataURL("image/png");
   pdf.addImage(img1, "PNG", 0, 0, 210, 297);
 
-  // Page 2
   pdf.addPage();
   const canvas2 = await html2canvas(secondPage, { scale: 2 });
   const img2 = canvas2.toDataURL("image/png");
   pdf.addImage(img2, "PNG", 0, 0, 210, 297);
 
-  pdf.save("SOWMYZCOUTURE.pdf");
+  const saveContent = order+".pdf"
+  pdf.save(saveContent);
+
+  // restore UI after download
+  setHideInp(true);
+  setHideAddress(true);
 };
+
 
 
 
  const handleReset = () => {
   setImages([null, null, null]);
+  setAmount("");
+  setShip("");
+  setGetName("");
+  setTotal("");
+  setToAdress("");
 };
 
 
   return (
     <div className="wholeContainer">
     <div className="printWrapper" ref={printRef}>
-    <div className="container" style={{ display: firPageHide ? "flex" : "none" }}>
+    <div className="container">
       <div className="border">
+        <div className="topdateConfirm">
+          <h5> Today: {today} </h5>
+        </div>
         <div className="header">
           <div className="titleName">
             <h2>SOWMYZ COUTURE</h2>
           </div>
           <div className="getFirstRow inp">
-            <span style={{color:"orange"}} >Order {order} </span>
+            <span style={{color:"orange"}} >Order
+               <input type="number"
+                placeholder='Order'
+                value={order}
+                onChange={(e)=>setOrder(e.target.value)}
+                style={{
+                  width:"70px",
+                  border: isEmpty(amount) ? "1px solid red" : "transparent"
+                }} 
+               /> 
+              </span>
             <input
              className='amountInp'
              style={{
-              width:"120px"
+              width:"90px",
+              border: isEmpty(amount) ? "1px solid red" : "transparent"
              }} 
              value={amount}
              onChange={(e)=>setAmount(e.target.value)}
-             type="text"
+             type="number"
             placeholder='Amount' />
             <span>Shipping:</span>
             <input
              style={{
-              width:"155px"
+              width:"155px",
+              border: isEmpty(ship) ? "1px solid red" : "transparent"
              }}
              value={ship}
              onChange={(e)=>setShip(e.target.value)}  
-             type="text" placeholder='Shippping:' />
+             type="number" placeholder='Shippping:' />
             <span>Delivery:</span>
-            <input type='date'
+            <input type='text'
+            style={{
+              width:"100px",
+              border: isEmpty(ship) ? "1px solid red" : "transparent"
+            }}
              value={topDate}
              onChange={(e)=>setTopDate(e.target.value)}
              placeholder='Delivery date:' />
@@ -123,29 +154,29 @@ const handleDownload = async () => {
           <div className="getSecondRow inp">
             <span style={{marginLeft:"2.5px"}}>Name:</span>
             <input type="text"
+             style={{
+              border: isEmpty(getName) ? "1px solid red" : "transparent"
+             }}
              value={getName}
              onChange={(e)=>setGetName(e.target.value)}
              placeholder='Name' />
             <span >Total:</span>
-            <input type="text"
-              value={total}
-              onChange={(e)=>setTotal(e.target.value)}
-              style={{marginRight:"100px"}}  placeholder='Total' />
-            <input type="text" className='empty' />
+            <input type="number"
+              style={{marginRight:"100px"
+              }}  placeholder='Total' />
+            <input type="text" className='empty' disabled />
           </div>
           <div className="getThirdRow inp">
             <span>ACCESSORIES-I :</span>
             <input type="text"
              value={accGetOne}
-             onChange={(e)=>setAccGetOne(e.target.value)}
-             placeholder='ACCESSORIES-I' />
+             onChange={(e)=>setAccGetOne(e.target.value)} />
           </div>
           <div className="getFourthRow inp">
             <span>ACCESSORIES-II : </span>
-            <input type="text"
+            <input type="text"  
              value={accGetTwo}
-             onChange={(e)=>setAccGetTwo(e.target.value)}
-            placeholder='ACCESSORIES-II' />
+             onChange={(e)=>setAccGetTwo(e.target.value)} />
           </div>
           <div className="getFifthRow inp">
             <h5>DATE AND ACCOUNT</h5>
@@ -154,22 +185,31 @@ const handleDownload = async () => {
               <option value="Raja">Raja</option>
               <option value="SowmyzCouture">SowmyzCouture</option>
             </select>
-            <input type="date" />
+            <input type="date" 
+             value={amountGet}
+             onChange={(e)=>setAmountGet(e.target.value)}
+            />
           </div>
         </div>
+        <hr style={{border:"1px dashed black"}} />
         <div className="centerpage">
           <div className="cenFirst cen">
             <h5 style={{color:"orange"}} >Order {order}</h5>
           </div>
           <div className="cenSec cen">
             <p>MATERIALS AVAILABILITY</p>
-            <h6>Delivery Date: <span>{topDate}</span> </h6>
+            <h6>
+              Delivery Date: {topDate} 
+            </h6>
           </div>
           <div className="cenTwoLefAndRigh">
             <div className="leftCen">
               <div className="colCen">
                 <span>Name :</span>
-                <input type="text" placeholder='Customer Name' />
+                <input type="text"
+                  value={getName}
+                  onChange={(e)=>setGetName(e.target.value)}
+                  placeholder='Customer Name' />
               </div>
               <div className="colCen">
                 <span>Dress :</span>
@@ -181,13 +221,11 @@ const handleDownload = async () => {
               </div>
               <div className="colCen">
                 <span>Accessory-I :</span>
-                <input onChange={setAccGetOne.value} type="text" value={accGetOne} 
-                placeholder='Accessories - I' />
+                <input onChange={setAccGetOne.value} type="text" value={accGetOne} />
               </div>
               <div className="colCen">
                 <span>Accessory-II :</span>
-                <input onChange={setAccGetTwo.value} type="text" value={accGetTwo} 
-                placeholder='Accessories - II' />
+                <input onChange={setAccGetTwo.value} type="text" value={accGetTwo} />
               </div>
             </div>
             <div className="righCen">
@@ -215,7 +253,7 @@ const handleDownload = async () => {
             <h5>DELIVERED TO:</h5>
           </div>
           <div className="addThree">
-            <input
+            {/* <input
              value={toAddress}
              onChange={(e)=>setToAdress(e.target.value)}
              placeholder='Enter to address'
@@ -225,15 +263,28 @@ const handleDownload = async () => {
               height:"100px",
               textAlign:"start" ,
               textWrap:"wrap",
-              display: hideAddress ? "flex" : "none"
+              visibility: hideAddress ? "visible" : "hidden"
              }} 
-            type="text" />
-            <p className='topSideP' style={{ whiteSpace: "pre-line" }}>
+            type="text" /> */}
+            <p className='topSideP' 
+              style={{ 
+              whiteSpace: "pre-line"
+             }}>
               {toAddress.split(",")           // split by comma
                 .map((line) => line.trim()) // remove extra spaces
                 .join("\n")           // join with newline character
               }
             </p>
+              <textarea
+                value={toAddress}
+                style={{
+                  textWrap:"wrap",
+                  visibility: hideAddress ? "visible" : "hidden"
+                }}  
+                onChange={(e) => setToAdress(e.target.value)}
+                rows={8}
+              />
+
             <p className='botSideP' style={{ whiteSpace: "pre-line" }}>
               <h4
                style={{
@@ -311,10 +362,7 @@ const handleDownload = async () => {
         </div>
       </div>
     </div>
-    <div className="secondContainer"
-     style={{
-      display: secPageHide ? "flex" : "none"
-     }}>
+    <div className="secondContainer">
       <div className="borders">
         <div className="topViewSec">
             <h4>DELIVERED TO : </h4>
@@ -352,45 +400,44 @@ const handleDownload = async () => {
         <hr />
         <div className="empty"></div>
         <div className="bottomSecPage">
-          <form>
-            <table>
-              <tr>
-                <td style={{textDecoration:"underline"}} >CUTTING MEASUREMENT</td>
-                <td>
-
-                </td>
-                <td style={{textDecoration:"underline"}} >
-                  TOP
-                </td>
-              </tr>
-              <tr>
-                <td>W</td>
-                <td></td>
-                <td>LINING</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>SATIN</td>
-              </tr>
-              <tr>
-                <td>B</td>
-                <td>CIRCLE</td>
-                <td>MAIN FABRIC</td>
-              </tr>
-              <tr>
-                <td>L</td>
-                <td>RUFFLE</td>
-                <td>NET</td>
-              </tr>
-              <tr>
-                <td>S</td>
-              </tr>
-              <tr>
-                <td>N</td>
-              </tr>
-            </table>
-          </form>
+          <div className="botPageFir">
+            <p className='cutClass' >CUTTING MEASUREMENT</p>
+            <p>W</p>
+            <p>B</p>
+            <p>L</p>
+            <p>S</p>
+            <p>N</p>
+          </div>
+          <div className="botPageSec">
+            <p>CIRCLE</p>
+            <p className='btoRuffle' >RUFFLE</p>
+          </div>
+          <div className="botPageThr">
+            <p>Tailor</p>
+            <form>
+              <table border={1} >
+                <tr>
+                  <td>Cancan</td>
+                  <td><input type="text" style={{ width:"70px" }} /></td>
+                </tr>
+                <tr>
+                  <td>Meter</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>H.H</td>
+                  <td></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+          <div className="botPageFour">
+            <p className='cutClass' >TOP</p>
+            <p>LINING</p>
+            <p>SATIN</p>
+            <p>MAIN FABRIC</p>
+            <p>NET</p>
+          </div>
         </div>
       </div>
     </div>
@@ -398,59 +445,11 @@ const handleDownload = async () => {
     </div>  
     <div className="finishUp"
     >
-      <button
-        onClick={() => {
-          setSecPageHide(false);
-          setFirPageHide(true);
-        }}
-      >
-        {"<"}
-      </button>
-      <button className='clBTN' onClick={handleDownload}>
-       Download
+      <button className='clBTN' onClick={validateAndDownload}>
+        Download
       </button>
       <button className='reBTN' onClick={handleReset}>Reset</button>
-      <button
-        onClick={() => {
-          setFirPageHide(false);
-          setSecPageHide(true);
-        }}
-      >
-        {">"}
-      </button>
-      <button onClick={() => setOrder(prev => prev + 1)}>
-        +
-      </button>
-      <button onClick={() => setOrder(prev => prev - 1)}>
-        -
-      </button>
     </div>
     </div>
   )
 }
-
-
-
-// const handleDownload = async () => {
-//   const pdf = new jsPDF("p", "mm", "a4");
-
-
-//   setHideInp(false)
-//   setHideAddress(false)
-//   setOrder(prev => prev + 1);
-//   const firstPage = document.querySelector(".container");
-//   const secondPage = document.querySelector(".secondContainer");
-
-//   // Page 1
-//   const canvas1 = await html2canvas(firstPage, { scale: 2 });
-//   const img1 = canvas1.toDataURL("image/png");
-//   pdf.addImage(img1, "PNG", 0, 0, 210, 297);
-
-//   // Page 2
-//   pdf.addPage();
-//   const canvas2 = await html2canvas(secondPage, { scale: 2 });
-//   const img2 = canvas2.toDataURL("image/png");
-//   pdf.addImage(img2, "PNG", 0, 0, 210, 297);
-
-//   pdf.save("SOWMYZCOUTURE.pdf");
-// };
