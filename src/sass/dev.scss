@@ -16,10 +16,6 @@ body {
     justify-content: start;
     flex-direction: column;
 }
-.topdateConfirm{
-    position: absolute;
-    top: -20px;
-}
 .container {
   width: 210mm;
   min-height: 297mm;
@@ -35,6 +31,11 @@ body {
     border: 2px solid #000;
     overflow: hidden;
     overflow-x: hidden;
+    position: relative;
+    .topdateConfirm{
+        position: absolute;
+        top: -20px;
+    }
     .header{
         width: 100%;
         height: 25%;
@@ -168,7 +169,7 @@ body {
                 height: 25px;
                 flex-direction: row;
                 input{
-                    width: 50px;
+                    width: 30px;
                 }
                 p{
                     width: 25px;
@@ -177,7 +178,7 @@ body {
                 }
             }
             input{
-                width: 200px;
+                width: 150px;
             }
 
         }
@@ -238,10 +239,16 @@ body {
             width: 35%;
             height: 100%;
             display: flex;
-            align-items: center;
+            align-items: start;
             flex-direction: column;
             justify-content: start;
             margin-bottom: 30px;
+            li{
+                list-style-type: none;
+                text-align: start;
+                font-size: 13px;
+                font-weight: 700;
+            }
             .inpGetImages{
                 height: 10px;
                 width: 100%;
@@ -428,6 +435,9 @@ span{
             .btoRuffle{
                 margin-bottom: 100px;
             }
+            .botP{
+                transform: translateX(-80px);
+            }
         }
         .botPageThr{
             width: 25%;
@@ -437,6 +447,10 @@ span{
             justify-content: center;
             flex-direction: column;
             align-content: center;
+            transform: translateY(-50px) translateX(-90px);
+            .tailorHead{
+                transform: translateY(-10px);
+            }
             p{
                 position: relative;
                 top: 0;
@@ -451,6 +465,12 @@ span{
                 position: absolute;
                 margin-bottom: 80px;
                 margin-right: 80px;
+                td{
+                    padding: 2px;  
+                }
+                input{
+                    width: 150px;
+                }
             }
         }
         .botPageFour{
@@ -459,15 +479,21 @@ span{
             display: flex;
             align-items: start;
             flex-direction: column;
+            justify-content: start;
             .cutClass{
                 font-weight: 700;
                 margin-bottom: 50px;
                 text-decoration: underline;
+                transform: translateY(20px);
             }
             p{
                 margin-left: 5px;
-                height: 5px;
+                height: 0px;
                 text-align: left;
+            }
+            li{
+                list-style-type: none;
+                font-size: 12px;
             }
         }
     }
